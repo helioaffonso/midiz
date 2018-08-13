@@ -1,0 +1,61 @@
+DROP TABLE IF EXISTS `midiz`.`pospontomusica`;
+DROP TABLE IF EXISTS `midiz`.`ponto`;
+DROP TABLE IF EXISTS `midiz`.`nota`;
+DROP TABLE IF EXISTS `midiz`.`musica`;
+
+
+
+DROP TABLE IF EXISTS `midiz`.`musica`;
+CREATE TABLE  `midiz`.`musica` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `Nome` varchar(60) NOT NULL,
+  `Caminho` varchar(200) default NULL,
+  PRIMARY KEY  (`ID`),
+  UNIQUE KEY `Nome` (`Nome`,`Caminho`),
+  KEY `idx_id_musica` (`ID`),
+  KEY `idx_nome_musica` (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=101 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `midiz`.`nota`;
+CREATE TABLE  `midiz`.`nota` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `Nota` smallint(6) NOT NULL,
+  `Duracao` smallint(6) NOT NULL,
+  `canal` int(10) unsigned NOT NULL,
+  `instrumento` int(10) unsigned NOT NULL,
+  PRIMARY KEY  (`ID`),
+  UNIQUE KEY `Nota` (`Nota`,`Duracao`,`canal`,`instrumento`),
+  KEY `idx_id_nota` (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=107557 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `midiz`.`ponto`;
+CREATE TABLE  `midiz`.`ponto` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `Coord1` smallint(6) NOT NULL,
+  `Coord2` smallint(6) NOT NULL,
+  `Coord3` smallint(6) NOT NULL,
+  `Coord4` smallint(6) NOT NULL,
+  `Coord5` smallint(6) NOT NULL,
+  `Coord6` smallint(6) NOT NULL,
+  `Coord7` smallint(6) NOT NULL,
+  `Tipo` char(1) NOT NULL,
+  `idRef` int(10) DEFAULT NULL,
+  PRIMARY KEY  (`ID`),
+  UNIQUE KEY `Coord1` (`Coord1`,`Coord2`,`Coord3`,`Coord4`,`Coord5`,`Coord6`,`Coord7`,`Tipo`,`idRef`),
+  KEY `idx_id_Ponto` (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=101709 DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `midiz`.`pospontomusica`;
+CREATE TABLE  `midiz`.`pospontomusica` (
+  `ID` int(10) unsigned NOT NULL auto_increment,
+  `musica_id` int(10) unsigned NOT NULL,
+  `ponto_id` int(10) unsigned NOT NULL,
+  `nota_id` int(10) unsigned NOT NULL,
+  `posicao` int(11) NOT NULL,
+  PRIMARY KEY  (`ID`),
+  UNIQUE KEY `musica_id` (`musica_id`,`ponto_id`,`posicao`),
+  KEY `idx_id_PosPtMus` (`ID`)
+) ENGINE=MyISAM AUTO_INCREMENT=207769 DEFAULT CHARSET=latin1;
+
+
+
